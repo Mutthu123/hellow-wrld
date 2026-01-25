@@ -1,160 +1,109 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>DevOps Registration</title>
+  <meta charset="UTF-8">
+  <title>DevOps Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+    }
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f8;
-}
+    .container {
+      background-color: #ffffff;
+      padding: 20px;
+      margin: 40px auto;
+      width: 40%;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
 
-.container {
-  background-color: #ffffff;
-  padding: 25px;
-  margin: 40px auto;
-  width: 40%;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+    h1 {
+      text-align: center;
+      color: #333;
+    }
 
-h1 {
-  text-align: center;
-  color: #0d6efd;
-}
+    p {
+      text-align: center;
+      color: #555;
+    }
 
-label {
-  font-weight: bold;
-  margin-top: 15px;
-  display: block;
-}
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
 
-input:focus {
-  border-color: #0d6efd;
-  outline: none;
-}
+    .registerbtn {
+      background-color: #0b5ed7;
+      color: white;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      margin-top: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
 
-.registerbtn {
-  background-color: #0d6efd;
-  color: white;
-  padding: 12px;
-  width: 100%;
-  border: none;
-  font-size: 16px;
-  border-radius: 5px;
-  margin-top: 20px;
-  cursor: pointer;
-}
+    .registerbtn:hover {
+      background-color: #084298;
+    }
 
-.registerbtn:hover {
-  background-color: #084298;
-}
+    .signin {
+      text-align: center;
+      margin-top: 15px;
+    }
 
-.error {
-  color: red;
-  font-size: 14px;
-}
-
-.success {
-  color: green;
-  text-align: center;
-  font-size: 18px;
-}
-</style>
+    hr {
+      margin: 20px 0;
+    }
+  </style>
 </head>
 
 <body>
 
-<form onsubmit="return validateForm()">
+<form action="action_page.php" method="post">
   <div class="container">
-    <h1>DevOps Registration</h1>
+    <h1>New User Registration</h1>
+    <p>DevOps Learning Program by <b>MUTTHU M</b></p>
+    <hr>
 
-    <label>Name (Only letters, max 20)</label>
-    <input type="text" id="name" required>
-    <div class="error" id="nameError"></div>
+    <label for="name">Enter Your Name</label>
+    <input type="text" placeholder="Enter Full Name" name="name" id="name" required>
 
-    <label>Mobile (Only numbers, 10 digits)</label>
-    <input type="text" id="mobile" required>
-    <div class="error" id="mobileError"></div>
+    <label for="mobile">Enter Your Mobile Number</label>
+    <input type="tel" placeholder="Enter Mobile Number" name="mobile" id="mobile" required>
 
-    <label>Email (Only @gmail.com)</label>
-    <input type="text" id="email" required>
-    <div class="error" id="emailError"></div>
+    <label for="email">Enter Your Email</label>
+    <input type="email" placeholder="Enter Email" name="email" id="email" required>
 
-    <label>Password</label>
-    <input type="password" id="password" required>
-    <div class="error" id="passwordError"></div>
+    <label for="psw">Password</label>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+    <label for="psw-repeat">Repeat Password</label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+
+    <hr>
+    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
     <button type="submit" class="registerbtn">Register</button>
+  </div>
 
-    <p class="success" id="successMsg"></p>
+  <div class="container signin">
+    <p>Already have an account? <a href="#">Sign in</a></p>
   </div>
 </form>
 
-<script>
-function validateForm() {
-
-  // Clear messages
-  document.getElementById("nameError").innerHTML = "";
-  document.getElementById("mobileError").innerHTML = "";
-  document.getElementById("emailError").innerHTML = "";
-  document.getElementById("passwordError").innerHTML = "";
-  document.getElementById("successMsg").innerHTML = "";
-
-  let name = document.getElementById("name").value;
-  let mobile = document.getElementById("mobile").value;
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
-
-  // Name: only letters, max 20
-  let namePattern = /^[A-Za-z]{1,20}$/;
-  if (!namePattern.test(name)) {
-    document.getElementById("nameError").innerHTML =
-      "Name must contain only letters and max 20 characters";
-    return false;
-  }
-
-  // Mobile: only numbers, exactly 10
-  let mobilePattern = /^[0-9]{10}$/;
-  if (!mobilePattern.test(mobile)) {
-    document.getElementById("mobileError").innerHTML =
-      "Mobile number must be exactly 10 digits";
-    return false;
-  }
-
-  // Email: only gmail.com
-  let emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-  if (!emailPattern.test(email)) {
-    document.getElementById("emailError").innerHTML =
-      "Email must be a valid @gmail.com address";
-    return false;
-  }
-
-  // Password: upper, lower, number, symbol
-  let passwordPattern =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-  if (!passwordPattern.test(password)) {
-    document.getElementById("passwordError").innerHTML =
-      "Password must contain uppercase, lowercase, number & symbol (min 8 chars)";
-    return false;
-  }
-
-  document.getElementById("successMsg").innerHTML =
-    "Registration Successful 🚀 Happy DevOps Learning!";
-  return false; // stop actual submit for demo
-}
-</script>
+<h1 style="text-align:center;">Thank You, Happy Learning 🚀</h1>
 
 </body>
 </html>
